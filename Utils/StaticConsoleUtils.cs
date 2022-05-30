@@ -5,9 +5,9 @@ namespace Utils {
     public static class StaticConsoleUtils {
         public static string ReverseString(this string txtToReverse) => new string(txtToReverse.Reverse().ToArray());
 
-        public static dynamic Input<T>(string txtToShow)
+        public static dynamic Input<T>(string txtToBeShown)
         {
-            Console.Write(txtToShow);
+            Console.Write(txtToBeShown);
             string inp = Console.ReadLine();
             
             if (typeof(T) == typeof(int))
