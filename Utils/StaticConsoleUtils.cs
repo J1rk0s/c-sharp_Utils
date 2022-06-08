@@ -28,7 +28,18 @@ namespace Utils {
 
             return null;
         }
-        public static string Capitalize(this string txt) => txt[0].ToString().ToUpper() + txt.Substring(1);
+
+        public static string Capitalize(this string txt) {
+            if (txt.Length == 1)
+            {
+                return txt.ToUpper();
+            }
+            char[] chars = txt.ToCharArray();
+            string letter = Convert.ToString(txt[0]);
+            letter = letter.ToUpper();
+            chars[0] = Convert.ToChar(letter);
+            return new string(chars);
+        }
 
         public static int QuadraticEquationDiscriminant(int a, int b, int c) => (b * b) - 4 * a * c;
 
