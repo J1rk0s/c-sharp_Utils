@@ -1,5 +1,6 @@
 # c-sharp_Utils
 Some c# utils
+PS: Sorry for my english
 
 ## Usage
 1. Download dll in bin/release
@@ -34,4 +35,5 @@ Some c# utils
    * This is a euclid algorithm
 7. MultiplyAllInList
     * This one is also self explanatory
+    * It is also an extension method
     * It multiplies all numbers an a given array (PS: I know that the method name contains List so i´m gonna fix it ASAP)
