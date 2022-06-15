@@ -1,6 +1,6 @@
 # c-sharp_Utils
-Some c# utils
-PS: Sorry for my english
+* Some c# utils
+* PS: Sorry for my english
 
 ## Usage
 1. Download dll in bin/release
