@@ -33,7 +33,7 @@
     * ```int [name] = BinarySearch([array a], [name of number to be found in array]);```
 6. EuclidAlgo
    * This is a euclid algorithm
-7. MultiplyAllInList
+7. MultiplyAllInArray
     * This one is also self explanatory
     * It is also an extension method
-    * It multiplies all numbers an a given array (PS: I know that the method name contains List so i´m gonna fix it ASAP)
+    * It multiplies all numbers an a given array
