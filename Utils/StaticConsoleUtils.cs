@@ -71,7 +71,7 @@ namespace Utils {
             return a;
         }
 
-        public static int MultiplyAllInList(this int[] arr) {
+        public static int MultiplyAllInArray(this int[] arr) {
             int val = 0;
             foreach (int i in arr) {
                 val *= i;
