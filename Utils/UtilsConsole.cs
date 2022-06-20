@@ -2,20 +2,12 @@
 using System.Linq;
 
 namespace Utils {
-    public static class UtilsConsole {
-        public struct UsefullRegexQueries {
-            public static string OnlyNumbers = @"\B[0-9]+";
-            public static string OnlyUpper = @"\B[A-Z]+";
-            public static string OnlyLower = @"\B[a-z]+";
-            public static string StartUpper = @"\b[A-Z]";
-            public static string StartLower = @"\n[a-z]";
-        }
+    public static class StaticConsoleUtils {
         public static string ReverseString(this string txtToReverse) => new string(txtToReverse.Reverse().ToArray());
 
-        public static dynamic Input<T>(string txtToBeShown, ConsoleColor color = ConsoleColor.White) {
-            Console.ForegroundColor = color;
+        public static dynamic Input<T>(string txtToBeShown)
+        {
             Console.Write(txtToBeShown);
-            Console.ResetColor();
             string inp = Console.ReadLine();
             
             if (typeof(T) == typeof(int))
@@ -79,16 +71,12 @@ namespace Utils {
             return a;
         }
 
-        public static int MultiplyAllInArray(this int[] arr) {
-            int val = 1; 
+        public static int MultiplyAllInList(this int[] arr) {
+            int val = 0;
             foreach (int i in arr) {
                 val *= i;
             }
             return val;
         }
-
-        public static void DisplayPropability(string pathToData) { // Make python executer and pass file to predict values
-            Console.WriteLine("Under work!");
-        } 
     }
 }
