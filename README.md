@@ -37,3 +37,5 @@
     * This one is also self explanatory
     * It is also an extension method
     * It multiplies all numbers an a given array
+8. RegexExpressions
+    * This is a struct of some usefull regex expressions
