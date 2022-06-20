@@ -1,0 +1,6 @@
+C:\Users\jiriv\RiderProjects\Utils\Utils\bin\Debug\Utils.dll
+C:\Users\jiriv\RiderProjects\Utils\Utils\bin\Debug\Utils.pdb
+C:\Users\jiriv\RiderProjects\Utils\Utils\obj\Debug\Utils.csproj.AssemblyReference.cache
+C:\Users\jiriv\RiderProjects\Utils\Utils\obj\Debug\Utils.csproj.CoreCompileInputs.cache
+C:\Users\jiriv\RiderProjects\Utils\Utils\obj\Debug\Utils.dll
+C:\Users\jiriv\RiderProjects\Utils\Utils\obj\Debug\Utils.pdb

@@ -2,12 +2,22 @@
 using System.Linq;
 
 namespace Utils {
-    public static class StaticConsoleUtils {
+    public static class UtilsConsole {
+        
+        public struct RegexExpressions {
+            public static string OnlyNumbers = @"\B[0-9]";
+            public static string OnlyUpper = @"\B[A-Z]";
+            public static string OnlyLower = @"\B[a-z]";
+            public static string FirstLower = @"^[a-z]";
+            public static string FirstUpper = @"^[A-Z]";
+            public static string FirstNumber = @"^[0-9]";
+        }
         public static string ReverseString(this string txtToReverse) => new string(txtToReverse.Reverse().ToArray());
 
-        public static dynamic Input<T>(string txtToBeShown)
-        {
+        public static dynamic Input<T>(string txtToBeShown, ConsoleColor color = ConsoleColor.White) {
+            Console.ForegroundColor = color;
             Console.Write(txtToBeShown);
+            Console.ResetColor();
             string inp = Console.ReadLine();
             
             if (typeof(T) == typeof(int))
@@ -72,11 +82,15 @@ namespace Utils {
         }
 
         public static int MultiplyAllInList(this int[] arr) {
-            int val = 0;
+            int val = 1;
             foreach (int i in arr) {
                 val *= i;
             }
             return val;
+        }
+
+        public static void Predictor(string pathToData) { // Make predictor in other language and pass data to it
+            Console.WriteLine("Undergoing work!");
         }
     }
 }
