@@ -114,7 +114,7 @@ namespace Utils {
         public static T[] RemoveDuplicates<T>(this T[] array) => new HashSet<T>(array).ToArray();
 
         public static void Predictor(string pathToData) { // Make predictor in other language and pass data to it
-            Console.WriteLine("Undergoing work!");
+            Console.WriteLine("Undergoing work!!");
         }
     }
 }
