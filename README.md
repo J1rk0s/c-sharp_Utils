@@ -39,3 +39,13 @@
     * It multiplies all numbers an a given array
 8. RegexExpressions
     * This is a struct of some usefull regex expressions
+9. Similar
+    * This is an extension method
+    * Returns similar strings from inputed text
+    * To use:
+    * ```string[] [variable name] = [string name].Similar();```
+10. RemoveDuplicates
+    * Extension method
+    * Removes duplicates from List or Array
+    * To use:
+    * ```[list or array name] = [list or array name].RemoveDuplicates();```
