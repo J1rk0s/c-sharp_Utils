@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Utils {
     public static class UtilsConsole {
@@ -19,26 +21,20 @@ namespace Utils {
             Console.Write(txtToBeShown);
             Console.ResetColor();
             string inp = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(inp)) return null;
             
-            if (typeof(T) == typeof(int))
-            {
-                return Convert.ToInt32(inp);
-            }
+            if (typeof(T) == typeof(int)) return Convert.ToInt32(inp);
 
-            if (typeof(T) == typeof(string))
-            {
-                return inp;
-            }
+            if (typeof(T) == typeof(string)) return inp;
 
-            if (typeof(T) == typeof(bool))
-            {
-                return Convert.ToBoolean(inp);
-            }
+            if (typeof(T) == typeof(bool)) return Convert.ToBoolean(inp);
 
             return null;
         }
 
-        public static string Capitalize(this string txt) {
+        [Obsolete("Use Capitalize instead", false)]
+        public static string FirstUp(this string txt) {
             if (txt.Length == 1)
             {
                 return txt.ToUpper();
@@ -50,6 +46,8 @@ namespace Utils {
             return new string(chars);
         }
 
+        public static string Capitalize(this string txt) => txt[0].ToString().ToUpper() + txt.Substring(1);
+        
         public static int QuadraticEquationDiscriminant(int a, int b, int c) => (b * b) - 4 * a * c;
 
         public static int? BinarySearch(int[] array, int targetNumber) {   // Useless
@@ -88,6 +86,32 @@ namespace Utils {
             }
             return val;
         }
+        public static float MultiplyAllInList(this float[] arr) {
+            float val = 1;
+            foreach (float i in arr) {
+                val *= i;
+            }
+            return val;
+        }
+
+        public static string[] Similar(this string txt){
+            HashSet<string> similars = new HashSet<string>(){txt.ToLower(), txt.ToUpper(), txt.Capitalize()};
+            if (txt.Contains('i') || txt.Contains('I')) {
+                similars.Add(txt.Replace('i', '1'));
+                similars.Add(txt.Replace('I', '1'));
+                similars.Add(Regex.Replace(txt, @"[Ii]", "1"));
+            }
+
+            if (txt.Contains('E') || txt.Contains('e')) {
+                similars.Add(txt.Replace('E', '€'));
+                similars.Add(txt.Replace('e', '€'));
+                similars.Add(Regex.Replace(txt, @"[Ee]", "€"));
+            }
+            return similars.ToArray();
+        }
+
+        public static List<T> RemoveDuplicates<T>(this List<T> list) => new HashSet<T>(list).ToList();
+        public static T[] RemoveDuplicates<T>(this T[] array) => new HashSet<T>(array).ToArray();
 
         public static void Predictor(string pathToData) { // Make predictor in other language and pass data to it
             Console.WriteLine("Undergoing work!");
