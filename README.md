@@ -49,3 +49,22 @@
     * Removes duplicates from List or Array
     * To use:
     * ```[list or array name] = [list or array name].RemoveDuplicates();```
+11. LinearSearchAlgo
+    * Performs linear search on given array
+    * To use:
+    * ```int? [name] = LinearSearchAlgo([array name], [target number]);```
+12. ReverseInt
+    * Same as ReverseString but this one reverses ints
+    * Extension method
+    * To use:
+    * ```int [name] = [name of int variable].ReverseInt();```
+13. SpongebobCase
+    * Makes spongebob case
+    * Example: input = "Hello"
+    * Output: "HeLlO"
+    * To use:
+    * ```string [name] = SpongebobCase([some string]);```
+14. GetAddressOfIntArray
+    * Returns IntPtr of given int array
+    * To use:
+    * ```IntPtr [name] = GetAddressOfIntArray([name of int array]);```
