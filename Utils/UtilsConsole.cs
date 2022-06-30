@@ -178,7 +178,7 @@ namespace Utils {
                 return list as List<T>;
             }
             
-            if (typeof(T) == typeof(int)) { }
+            if (typeof(T) == typeof(bool)) { }
             return null;
         }
     }
