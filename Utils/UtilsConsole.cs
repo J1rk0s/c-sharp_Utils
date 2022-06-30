@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 namespace Utils {
     public static class UtilsConsole {
         
-        public struct RegexExpressions {
+        public struct RegexExpressions { // Add more expressions
             public static string OnlyNumbers = @"\B[0-9]";
             public static string OnlyUpper = @"\B[A-Z]";
             public static string OnlyLower = @"\B[a-z]";
@@ -62,7 +62,7 @@ namespace Utils {
                     return Array.IndexOf(first, targetNumber);
                 }
             }
-            else if(mid < targetNumber){
+            else if(mid < targetNumber) {
                 foreach (int secondAr in second) {
                     return Array.IndexOf(second, targetNumber);
                 }
@@ -122,7 +122,7 @@ namespace Utils {
                 similars.Add(txt.Replace('s', '$'));
                 similars.Add(Regex.Replace(txt, @"[Ss]", "$"));
             }
-            if (txt.Contains(' ') || txt.Contains(' ')) {
+            if (txt.Contains(' ')) {
                 similars.Add(txt.Replace(' ', '_'));
             }
             
@@ -141,7 +141,7 @@ namespace Utils {
             return string.Concat(sr);
         }
 
-        public static unsafe IntPtr GetAdressOfIntArray(int[] array) {
+        public static unsafe IntPtr GetAddressOfIntArray(int[] array) {
             fixed (int* ptr = array) {
                 return new IntPtr(&ptr);
             }
@@ -149,9 +149,37 @@ namespace Utils {
         
         public static List<T> RemoveDuplicates<T>(this List<T> list) => new HashSet<T>(list).ToList();
         public static T[] RemoveDuplicates<T>(this T[] array) => new HashSet<T>(array).ToArray();
+        
 
-        public static void Predictor(string pathToData) { 
+        public static void Predictor(string pathToData) { // Add python engine
             Console.WriteLine("Undergoing work!!");
+        }
+
+        public static string RandomString(int length, bool firstUpper = false) {
+            Random rnd = new Random();
+            List<char> list = new List<char>();
+            if (firstUpper) {
+                list.Add((char) rnd.Next(65,90));
+                length -= 1;
+            }
+            for (int i = 0; i < length; i++) {
+                list.Add((char) rnd.Next(97,122));
+            }
+
+            return string.Join("", list);
+        }
+
+        public static List<T> ListWithRandomValues<T>(int length) {
+            List<dynamic> list = new List<dynamic>(); 
+            if (typeof(T) == typeof(string)) {
+                for (int i = 0; i < length; i++) {
+                    list.Add(RandomString(5));
+                }
+                return list as List<T>;
+            }
+            
+            if (typeof(T) == typeof(int)) { }
+            return null;
         }
     }
 }
