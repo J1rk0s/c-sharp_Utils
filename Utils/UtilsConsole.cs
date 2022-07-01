@@ -5,7 +5,8 @@ using System.Text.RegularExpressions;
 
 namespace Utils {
     public static class UtilsConsole {
-        
+    
+        private static readonly Random rnd = new Random();
         public struct RegexExpressions { // Add more expressions
             public static string OnlyNumbers = @"\B[0-9]";
             public static string OnlyUpper = @"\B[A-Z]";
@@ -89,6 +90,42 @@ namespace Utils {
             return null;
         }
 
+        public static IEnumerable<(int firstNumber, int secondNumber)?> GetSumPairs(int[] array, int targetNumber) {
+            foreach (int x in array) {
+                foreach (int y in array) {
+                    if (x + y == targetNumber) {
+                        yield return (x, y);
+                    }
+                }
+            }
+            yield return null;
+        }
+        
+        public static IEnumerable<(int firstNumber, int secondNumber, int thirdNumber)?> GetSumTripletPairs(int[] array, int targetNumber) {
+            foreach (int x in array) {
+                foreach (int y in array) {
+                    foreach (int z in array) {
+                        if (x + y + z == targetNumber) {
+                            yield return (x, y, z);
+                        }   
+                    }
+                }
+            }
+            yield return null;
+        }
+
+        public static int[] AlternatingSubarray(int[] arr) { // Working on this
+            List<int> ints = new List<int>();
+            for (int i = 0; i < arr.Length; i++) {
+                if (arr[i] > 0 && arr[i + 1] < 0) {
+                    ints.Add(arr[i]);
+                    ints.Add(arr[i + 1]);
+                }
+            }
+
+            return ints.ToArray();
+        }
+
         public static int MultiplyAllInList(this IEnumerable<int> arr) => arr.Aggregate((current, i) => current * i);
 
         public static float MultiplyAllInList(this float[] arr) {
@@ -129,7 +166,7 @@ namespace Utils {
             return similars.ToArray();
         }
 
-        public static string SpongebobCase(string txt) {
+        public static string SpongebobCase(this string txt) {
             string[] sr = new string[txt.Length];
             for (int i = 0; i < txt.Length; i++) {
                 if (i % 2 == 0) {
@@ -138,6 +175,20 @@ namespace Utils {
                 }
                 sr[i] = txt[i].ToString().ToLower();
             }
+            return string.Concat(sr);
+        }
+
+        public static string RandomCase(this string txt) {
+            string[] sr = new string[txt.Length];
+            for (int i = 0; i < txt.Length; i++) {
+                if (rnd.Next(0, 2) == 1) {
+                    sr[i] = txt[i].ToString().ToUpper();
+                    continue;
+                }
+
+                sr[i] = txt[i].ToString().ToUpper();
+            }
+
             return string.Concat(sr);
         }
 
@@ -150,13 +201,7 @@ namespace Utils {
         public static List<T> RemoveDuplicates<T>(this List<T> list) => new HashSet<T>(list).ToList();
         public static T[] RemoveDuplicates<T>(this T[] array) => new HashSet<T>(array).ToArray();
         
-
-        public static void Predictor(string pathToData) { // Add python engine
-            Console.WriteLine("Undergoing work!!");
-        }
-
         public static string RandomString(int length, bool firstUpper = false) {
-            Random rnd = new Random();
             List<char> list = new List<char>();
             if (firstUpper) {
                 list.Add((char) rnd.Next(65,90));
@@ -169,17 +214,25 @@ namespace Utils {
             return string.Join("", list);
         }
 
-        public static List<T> ListWithRandomValues<T>(int length) {
-            List<dynamic> list = new List<dynamic>(); 
+        public static List<T> ListWithRandomValues<T>(int length) { // Optimize this 
             if (typeof(T) == typeof(string)) {
+                string[] list = new string[length];
                 for (int i = 0; i < length; i++) {
-                    list.Add(RandomString(5));
+                    list[i] = RandomString(5);
                 }
-                return list as List<T>;
+                return list.ToList() as List<T>;
             }
             
-            if (typeof(T) == typeof(int)) { }
+            if (typeof(T) == typeof(int)) {
+                int[] list = new int[length];
+                for (int i = 0; i < length; i++) {
+                    list[i] = rnd.Next(500);
+                }
+
+                return list.ToList() as List<T>;
+            }
             return null;
         }
+        
     }
 }
