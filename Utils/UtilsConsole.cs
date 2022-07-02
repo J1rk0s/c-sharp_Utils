@@ -73,10 +73,9 @@ namespace Utils {
 
         public static int EuclidAlgo(int a, int b) {
             while (b > 0) {
-                int c = a / b;
-                int d = a - c * b;
+                int c = a % b;
                 a = b;
-                b = d;
+                b = c;
             }
             return a;
         }
@@ -98,7 +97,7 @@ namespace Utils {
                     }
                 }
             }
-            yield return null;
+            yield return (0,0);
         }
         
         public static IEnumerable<(int firstNumber, int secondNumber, int thirdNumber)?> GetSumTripletPairs(int[] array, int targetNumber) {
@@ -111,15 +110,25 @@ namespace Utils {
                     }
                 }
             }
-            yield return null;
+            yield return (0,0,0);
         }
 
         public static int[] AlternatingSubarray(int[] arr) { // Working on this
             List<int> ints = new List<int>();
+            int length = 0;
+            int max = 0;
             for (int i = 0; i < arr.Length; i++) {
                 if (arr[i] > 0 && arr[i + 1] < 0) {
                     ints.Add(arr[i]);
                     ints.Add(arr[i + 1]);
+                    length++;
+                    if (length > max) {
+                        max = length;
+                    }
+                }
+                else {
+                    length = 0;
+                    ints.Clear();
                 }
             }
 
