@@ -12,6 +12,8 @@
         <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,11 +38,14 @@
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
+        <Reference Include="System.Numerics" />
         <Reference Include="System.Xml" />
+        <Reference Include="System.Speech" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="AiUtils.cs" />
         <Compile Include="CollectionUtils.cs" />
+        <Compile Include="MathUtils.cs" />
         <Compile Include="MusicConsole.cs" />
         <Compile Include="RandomUtils.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

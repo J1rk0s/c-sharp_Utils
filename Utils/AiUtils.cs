@@ -4,9 +4,23 @@ using System.ComponentModel;
 using System.Linq;
 
 namespace Utils {
-    public class AiUtils {
+    public static class AiUtils {
         public static class SigmoidFunction {
             public static double LogisticFunction(double x) => 1 / (1 + Math.Pow(Math.E, -x));
+
+            public static double HyperbolicTangent(double x) => (Math.Pow(Math.E, x) -
+                Math.Pow(Math.E, -x)) / (Math.Pow(Math.E, x) + Math.Pow(Math.E, -x));
+        }
+        
+        public static class UsefullFunctions {
+            public static float Variance(int[] arr) {
+                float step1 = arr.Sum() / arr.Length;
+                List<float> step2 = arr.Select(item => item - step1).ToList();
+                List<float> step3 = step2.Select(item => (float) Math.Pow(item, 2)).ToList();
+                return step3.Sum() / arr.Length;
+            }
+
+            public static float StandardDeviation(int[] arr) => (float)Math.Sqrt(Variance(arr));
         }
 
         public static class LinRegression {
@@ -45,7 +59,7 @@ namespace Utils {
                 }
                 return xy.ToArray();
             }
-
+            
             // y intercept
             private static float A(float[,] dataset) => (float)((XorY(dataset, 1).Sum() * XorY(dataset, 0, true).Sum() - XorY(dataset, 0).Sum() * ValueMultiplier(dataset).Sum()) / (dataset.GetLength(0) * XorY(dataset, 0, true).Sum() - Math.Pow(XorY(dataset, 0).Sum(), 2)));
             private static float B(float[,] dataset) => B1(dataset) / B2(dataset); // Slope

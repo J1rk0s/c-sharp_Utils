@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace Utils {
     public static class MusicConsole {
-        public static class PianoChords {
+
+        public ref struct PianoChords {
             public static int C0 = 16;
             public static int Cs0 = 17;
             public static int D0 = 18;
@@ -106,7 +108,6 @@ namespace Utils {
             public static int Ds8 = 4978;
             public static int Wait = 0;
         }
-        
         public static void PlaySong(int[] song, int beepInterval = 300, int sleepInterval = 200, int sleepDelayOnWait = 500) {
             foreach (int c in song) {
                 if (c == PianoChords.Wait) {

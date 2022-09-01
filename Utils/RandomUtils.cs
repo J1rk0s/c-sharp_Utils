@@ -9,6 +9,7 @@ namespace Utils {
     public static class RandomUtils {
     
         private static readonly Random rnd = new Random();
+        
         public struct RegexExpressions { // Add more expressions
             public static string OnlyNumbers = @"\B[0-9]";
             public static string OnlyUpper = @"\B[A-Z]";
@@ -19,6 +20,8 @@ namespace Utils {
         }
 
         public static string ReverseString(this string txtToReverse) => new string(txtToReverse.Reverse().ToArray());
+
+        public static string RemoveWhitespaceFromString(this string txt) => string.Concat(txt.Where(x => !char.IsWhiteSpace(x)));
 
         public static int ReverseInt(this int intToReverse) => Convert.ToInt32(intToReverse.ToString().ReverseString());
         
@@ -53,9 +56,7 @@ namespace Utils {
         }
 
         public static string Capitalize(this string txt) => txt[0].ToString().ToUpper() + txt.Substring(1);
-        
-        public static int QuadraticEquationDiscriminant(int a, int b, int c) => (b * b) - 4 * a * c;
-        
+
         public static int EuclidAlgo(int a, int b) {
             while (b > 0) {
                 int c = a % b;
@@ -119,7 +120,7 @@ namespace Utils {
                     continue;
                 }
 
-                sr[i] = txt[i].ToString().ToUpper();
+                sr[i] = txt[i].ToString().ToLower();
             }
 
             return string.Concat(sr);
@@ -156,7 +157,6 @@ namespace Utils {
             foreach (Match s in colls) {
                 charsArr[s.Groups[0].Index] = Convert.ToChar(s.Groups[0].Value.ToUpper());
             }
-
             return new string(charsArr);
         }
 
@@ -167,16 +167,27 @@ namespace Utils {
         }
 
         public static List<string> StringAutocompletionList(List<string> words, string wordToAutocomplete) => words.Where(wr => wr.StartsWith(wordToAutocomplete) || wr.StartsWith(wordToAutocomplete.ToLower())).ToList();
-        public static string[] StringAutocompletionArray(string[] words, string wordToAutocomplete) => words.Where(wr => wr.StartsWith(wordToAutocomplete) || wr.StartsWith(wordToAutocomplete.ToLower())).ToArray();
 
         public static void HideInImage(string path, string txtToWrite) {
             if (txtToWrite.Length <= 1) {
                 return;
             }
             byte[] b = Encoding.ASCII.GetBytes(txtToWrite);
-            using (FileStream stream = new FileStream(path, FileMode.Append)) {
-                stream.Write(b, 0, b.Length);
-            }
+            using FileStream stream = new FileStream(path, FileMode.Append);
+            stream.Write(b, 0, b.Length);
         }
+
+        public static int[] LevenshteinDistance(string a, string b) {
+            List<int> indexes = new List<int>();
+            for (int i = 0; i < a.Length; i++) {
+                if (a[i] != b[i]) {
+                    indexes.Add(i);
+                }
+                if (i > b.Length - 1|| i > a.Length - 1) {
+                    break;
+                }
+            }
+            return indexes.ToArray();
+        } 
     }
 }
