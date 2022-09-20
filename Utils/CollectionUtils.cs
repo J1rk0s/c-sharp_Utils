@@ -62,11 +62,11 @@ namespace Utils {
 
         public static T[] RemoveDuplicates<T>(this T[] array) => new HashSet<T>(array).ToArray();
 
-        public static List<T>? ListWithRandomValues<T>(int length) {
+        public static List<T>? ListWithRandomValues<T>(int length,int maxInt = 100 ,int strLength = 5) {
             if (typeof(T) == typeof(string)) {
                 string[] list = new string[length];
                 for (int i = 0; i < length; i++) {
-                    list[i] = RandomUtils.RandomString(5);
+                    list[i] = RandomUtils.RandomString(strLength);
                 }
 
                 return list.ToList() as List<T>;
@@ -75,7 +75,7 @@ namespace Utils {
             if (typeof(T) == typeof(int)) {
                 int[] list = new int[length];
                 for (int i = 0; i < length; i++) {
-                    list[i] = rnd.Next(500);
+                    list[i] = rnd.Next(maxInt);
                 }
 
                 return list.ToList() as List<T>;
@@ -189,5 +189,7 @@ namespace Utils {
             }
             return arr;
         }
+
+        public static int Array2D_To_Array1D_Index(int x, int y, int arrayWidth) => x * arrayWidth + y;
     }
 }

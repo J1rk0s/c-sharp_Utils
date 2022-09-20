@@ -17,6 +17,7 @@ namespace Utils {
             public static string FirstLower = @"^[a-z]";
             public static string FirstUpper = @"^[A-Z]";
             public static string FirstNumber = @"^[0-9]";
+            public static string ValidIp = @"";
         }
 
         public static string ReverseString(this string txtToReverse) => new string(txtToReverse.Reverse().ToArray());

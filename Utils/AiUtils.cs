@@ -22,49 +22,42 @@ namespace Utils {
 
             public static float StandardDeviation(int[] arr) => (float)Math.Sqrt(Variance(arr));
         }
+        public static class Regression {
+            public static float RegressionCostFunction(float input, float predictedOutput) => input - predictedOutput;
+            public static double LinearRegression(double[] x, double[] y, double n) => YIntercept(x, y) + Slope(x, y) * n;
 
-        public static class LinRegression {
-            [Description("I am still working on it!")]
-            public static double LinearRegressionEquation(float[,] dataset, double x = 1) => A(dataset) + B(dataset) * x;
-
-            public static float[] XorY(float[,] dataset, int collum, bool times = false) {
-                float[] x = new float[dataset.GetLength(0)];
-                
-                if (collum > 1 || collum < 0) {
-                    x[0] = 0;
-                    return x;
+            public static double PCC(double[] x, double[] y) {
+                // Paerson correlation coefficient
+                double[] xMean = new double[x.Length], yMean = new double[x.Length], xYMean = new double[x.Length], x2Mean = new double[x.Length], y2Mean = new double[x.Length];
+                for (int i = 0; i <= x.Length - 1; i++) {
+                    xMean[i] = x[i] - x.Average();
+                    yMean[i] = y[i] - y.Average();
+                    xYMean[i] = xMean[i] * yMean[i];
+                    x2Mean[i] = Math.Pow(xMean[i], 2);
+                    y2Mean[i] = Math.Pow(yMean[i], 2);
                 }
-                for (int i = 0; i < dataset.GetLength(0); i++) {
-                    if(!times) x[i] = dataset[i, collum];
-                    if(times) x[i] = (float)Math.Pow(dataset[i, collum], 2);
-                }
-                return x;
+                return xYMean.Sum() / Math.Sqrt(x2Mean.Sum() * y2Mean.Sum());
             }
 
-            public static float[] ValueMultiplier(float[,] dataset) {
-                IList<float> xy = new List<float>();
-                for (int i = 0; i < dataset.GetLength(0); i++) {
-                    for (int j = 0; j < dataset.GetLength(1); j++) {
-                        for (int k = j + 1 ; k < dataset.GetLength(1); k++) {
-                            xy.Add(dataset[i,j] * dataset[i,k]);   
-                        }
-                    }
+            public static double YIntercept(double[] x, double[] y) => y.Average() - (Slope(x, y) * x.Average());
+            public static double Slope(double[] x, double[] y) => PCC(x, y) * (Sy(y) / Sx(x));
+            public static double Sx(double[] x) {
+                double[] x2Mean = new double[x.Length], xMean = new double[x.Length];
+                for (int i = 0; i <= x.Length - 1; i++) {
+                    xMean[i] = x[i] - x.Average();
+                    x2Mean[i] = Math.Pow(xMean[i], 2);
                 }
-                return xy.ToArray();
+                return Math.Sqrt(x2Mean.Sum() / x.Length);
             }
-            public static float[] XY_Values (float[,] dataset) {
-                IList<float> xy = new List<float>();
-                for (int i = 0; i < dataset.GetLength(0); i++) {
-                    xy.Add(dataset[i,0] * dataset[i,1]);
+
+            public static double Sy(double[] y) {
+                double[] y2Mean = new double[y.Length], yMean = new double[y.Length];
+                for (int i = 0; i <= y.Length - 1; i++) {
+                    yMean[i] = y[i] - y.Average();
+                    y2Mean[i] = Math.Pow(yMean[i], 2);
                 }
-                return xy.ToArray();
+                return Math.Sqrt(y2Mean.Sum() / y.Length);
             }
-            
-            // y intercept
-            private static float A(float[,] dataset) => (float)((XorY(dataset, 1).Sum() * XorY(dataset, 0, true).Sum() - XorY(dataset, 0).Sum() * ValueMultiplier(dataset).Sum()) / (dataset.GetLength(0) * XorY(dataset, 0, true).Sum() - Math.Pow(XorY(dataset, 0).Sum(), 2)));
-            private static float B(float[,] dataset) => B1(dataset) / B2(dataset); // Slope
-            private static float B1(float[,] dataset) => (float)(dataset.GetLength(0) * ValueMultiplier(dataset).Sum() - XorY(dataset, 0).Sum() * XorY(dataset, 1).Sum());
-            private static float B2(float[,] dataset) => (float)(dataset.GetLength(0) * XorY(dataset, 0, true).Sum() - Math.Pow(XorY(dataset, 0).Sum(), 2));
         }
     }
 }
