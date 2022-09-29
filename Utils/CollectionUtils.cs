@@ -13,12 +13,12 @@ namespace Utils {
             int[] second = array.Skip(mid).ToArray();
 
             if (mid > targetNumber) {
-                foreach (int firstAr in first) {
+                if (first.Any()) {
                     return Array.IndexOf(first, targetNumber);
                 }
             }
             else if (mid < targetNumber) {
-                foreach (int secondAr in second) {
+                if (second.Any()) {
                     return Array.IndexOf(second, targetNumber);
                 }
             }
@@ -62,7 +62,7 @@ namespace Utils {
 
         public static T[] RemoveDuplicates<T>(this T[] array) => new HashSet<T>(array).ToArray();
 
-        public static List<T>? ListWithRandomValues<T>(int length,int maxInt = 100 ,int strLength = 5) {
+        public static List<T>? ListWithRandomValues<T>(int length,int maxInt = 100 ,int strLength = 5, int minDouble = 1, int maxDouble = 50) {
             if (typeof(T) == typeof(string)) {
                 string[] list = new string[length];
                 for (int i = 0; i < length; i++) {
@@ -76,6 +76,14 @@ namespace Utils {
                 int[] list = new int[length];
                 for (int i = 0; i < length; i++) {
                     list[i] = rnd.Next(maxInt);
+                }
+
+                return list.ToList() as List<T>;
+            }
+            if (typeof(T) == typeof(double)) {
+                double[] list = new double[length];
+                for (int i = 0; i < length; i++) {
+                    list[i] = rnd.NextDouble() * (maxDouble - minDouble) + minDouble;
                 }
 
                 return list.ToList() as List<T>;
@@ -167,7 +175,8 @@ namespace Utils {
         public static int[,] ArrayWithRandomValues(int lenA, int lenB, int minNumber = 0, int maxNumber = 100) {
             if (maxNumber < minNumber) throw new ArgumentOutOfRangeException(nameof(maxNumber),"maxNumber is smaller than minNumber");
             if (minNumber > maxNumber) throw new ArgumentOutOfRangeException(nameof(maxNumber),"minNumber is bigger than maxNumber");
-            
+            if (maxNumber <= 0) throw new ArgumentOutOfRangeException(nameof(maxNumber));
+
             int[,] arr = new int[lenA, lenB];
             for (int i = 0; i < arr.GetUpperBound(0); i++) {
                 for (int j = 0; j < arr.GetUpperBound(1); j++) {
@@ -191,5 +200,18 @@ namespace Utils {
         }
 
         public static int Array2D_To_Array1D_Index(int x, int y, int arrayWidth) => x * arrayWidth + y;
+
+        public static T[] To1DArray<T>(this T[,] sourceArr)
+        {
+            List<T> dest = new List<T>();
+            for (int i = 0; i < sourceArr.GetLength(0); i++)
+            {
+                for (int y = 0; y < sourceArr.GetLength(1); y++)
+                {
+                    dest.Add(sourceArr[i,y]);
+                }
+            }
+            return dest.ToArray();
+        }
     }
 }

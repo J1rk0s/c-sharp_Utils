@@ -17,7 +17,6 @@ namespace Utils {
             public static string FirstLower = @"^[a-z]";
             public static string FirstUpper = @"^[A-Z]";
             public static string FirstNumber = @"^[0-9]";
-            public static string ValidIp = @"";
         }
 
         public static string ReverseString(this string txtToReverse) => new string(txtToReverse.Reverse().ToArray());
@@ -26,11 +25,11 @@ namespace Utils {
 
         public static int ReverseInt(this int intToReverse) => Convert.ToInt32(intToReverse.ToString().ReverseString());
         
-        public static dynamic Input<T>(string txtToBeShown, ConsoleColor color = ConsoleColor.White) {
+        public static dynamic? Input<T>(string txtToBeShown, ConsoleColor color = ConsoleColor.White) {
             Console.ForegroundColor = color;
             Console.Write(txtToBeShown);
             Console.ResetColor();
-            string inp = Console.ReadLine();
+            string inp = Console.ReadLine() ?? string.Empty;
 
             if (string.IsNullOrEmpty(inp)) return null;
             
@@ -143,11 +142,6 @@ namespace Utils {
             return string.Join("", list);
         }
         
-        public static double RadianToDegrees(double radian) => (radian * 180) / Math.PI;
-        public static double DegreesToRadians(double degree) => (degree * Math.PI) / 180;
-        public static float FahrenhaitToCelsius(float fahrenhait) => (float) ((fahrenhait - 32) / 1.8);
-        public static float CelsiusToFahrenhait(float celsius) => (float) (celsius * 1.8 + 32);
-
         public static string ReverseCase(this string txt) { // Optimize this
             char[] charsArr = txt.ToCharArray();
             MatchCollection coll = Regex.Matches(txt, @"[A-Z]");
@@ -177,18 +171,5 @@ namespace Utils {
             using FileStream stream = new FileStream(path, FileMode.Append);
             stream.Write(b, 0, b.Length);
         }
-
-        public static int[] LevenshteinDistance(string a, string b) {
-            List<int> indexes = new List<int>();
-            for (int i = 0; i < a.Length; i++) {
-                if (a[i] != b[i]) {
-                    indexes.Add(i);
-                }
-                if (i > b.Length - 1|| i > a.Length - 1) {
-                    break;
-                }
-            }
-            return indexes.ToArray();
-        } 
     }
 }

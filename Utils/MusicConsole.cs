@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace Utils {
@@ -118,5 +117,8 @@ namespace Utils {
                 Thread.Sleep(sleepInterval);
             }
         }
+
+        public static float Wavelength(float frequency) => (float) (MathUtils.c / frequency);
+        public static float Frequency(float wavelength) => (float) (MathUtils.c / wavelength);
     }
 }
