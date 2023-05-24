@@ -1,6 +1,7 @@
 # c-sharp_Utils
 * Some c# utils
 * PS: Sorry for my english
+* Nuget package: https://www.nuget.org/packages/CSharp.Mix.Utils/1.5.0
 
 ## Instalation
 1) Go to releases
