@@ -8,7 +8,8 @@
 2) Find latest version
 3) Download the dll
 4) Add reference to it in your c# project
-5) Start using it
+5) Add "using Utils;" at the top of your .cs file
+6) Start using it
 
 ## List of methods
 Full list of methods is [here](https://github.com/J1rk0s/c-sharp_Utils/wiki)
